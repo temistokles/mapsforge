@@ -28,8 +28,9 @@ class MapReadResultBuilder {
 	}
 
 	void add(PoiWayBundle poiWayBundle) {
-		this.pointOfInterests.addAll(poiWayBundle.pois);
-		this.ways.addAll(poiWayBundle.ways);
+		//if poiWayBundle is null (this happens in case the map source data is corrupted for some tile) the app would crash
+		this.pointOfInterests.addAll(poiWayBundle == null ? new ArrayList<PointOfInterest>() : poiWayBundle.pois);
+		this.ways.addAll(poiWayBundle == null ? new ArrayList<Way>() : poiWayBundle.ways);
 	}
 
 	MapReadResult build() {
